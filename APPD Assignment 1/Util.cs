@@ -4,13 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace APPD_Assignment_1
 {
 	public static class Util //main parsing stuff and other methods in the original program.cs file
 	{
 
-		public static string pathToString(List<Station> stations)
+		public static string pathToString(List<Station> stations) // input station path
 		{
 
 			if (stations.Count <= 1)
@@ -21,7 +22,7 @@ namespace APPD_Assignment_1
 			int index = 0;
 			List<int> indices = new List<int>();
 			indices.Add(index);
-			while (indices[indices.Count - 1] != (stations.Count - 1))
+			while (indices[indices.Count - 1] != (stations.Count - 1)) // gets index of station, insert into indices
 			{
 				index = calcNextStationIndex(stations, index);
 				indices.Add(index);
@@ -30,8 +31,22 @@ namespace APPD_Assignment_1
 			Station station = stations[0];
 			Station nextStation = stations[indices[1]];
 			string commonLine = station.firstCommonLine(nextStation);
-			pathSB.AppendLine(String.Format("Aboard at {0} ({1}).", station.GetName(), station.GetStationCode(commonLine)));
-			pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.GetName(), nextStation.GetStationCode(commonLine)));
+			pathSB.AppendLine(String.Format("Board at {0} ({1}).", station.GetName(), station.GetStationCode(commonLine)));
+
+			//if (2 < indices.Count - 1)
+			//{
+			//	Station futureStation = stations[indices[2]];
+			//	//MessageBox.Show(station.firstCommonLine(futureStation));
+
+			//	if (station.firstCommonLine(futureStation) != null)
+			//	{
+			//		flag = false;
+			//	}
+			//}
+			
+			if (commonLine != null)
+				pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.GetName(), nextStation.GetStationCode(commonLine)));
+
 			for (int i = 1; i < indices.Count - 1; i++)
 			{
 				int j = indices[i];
@@ -39,8 +54,27 @@ namespace APPD_Assignment_1
 				nextStation = stations[indices[i + 1]];
 				commonLine = station.firstCommonLine(nextStation);
 
-				pathSB.AppendLine(String.Format("Change to {0} line", commonLine));
-				pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.GetName(), nextStation.GetStationCode(commonLine)));
+				bool flag = true;
+
+
+				// test cases that broke before, chinatown to admiralty, raffles to dhoby ghaut. should work fine now
+				if ((i + 2) <= (indices.Count - 1))
+				{
+					Station futureStation = stations[indices[i + 2]];
+
+					//MessageBox.Show(stations[indices[i + 2]].GetKey());
+
+					if (station.firstCommonLine(futureStation) != null)
+					{
+						flag = false;
+					}
+				}
+
+				if (flag)
+				{
+					pathSB.AppendLine(String.Format("Change to {0} line", commonLine));
+					pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.GetName(), nextStation.GetStationCode(commonLine)));
+				}
 			}
 			pathSB.AppendLine(String.Format("Alight at destination {0}.", nextStation.GetName()));
 			return pathSB.ToString();
@@ -49,7 +83,7 @@ namespace APPD_Assignment_1
 		public static int calcNextStationIndex(List<Station> stations, int index)
 		{
 			string currLine = stations[index].firstCommonLine(stations[index + 1]);
-			for (int i = index + 1; i < stations.Count - 1; i++)
+			for (int i = index + 1; i < stations.Count - 1; i++) // loops from current station
 			{
 				if (!currLine.Equals(stations[i].firstCommonLine(stations[i + 1])))
 				{

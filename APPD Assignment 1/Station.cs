@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,7 +52,9 @@ namespace APPD_Assignment_1
 
         public string firstCommonLine(Station other)
         {
-            return this.GetLines().Intersect(other.GetLines()).First();
+			IEnumerable<string> search = GetLines().Intersect(other.GetLines()); // error is thrown is .first of empty ienumerable
+
+			return search == null || !search.Any() ? null : search.First(); //if search.any() == true, ienumerable is not empty
         }
 
 		public string GetStationCode(string line)
