@@ -60,14 +60,13 @@ namespace APPD_Assignment_1
 				// test cases that broke before, chinatown to admiralty, raffles to dhoby ghaut. should work fine now
 				if ((i + 2) <= (indices.Count - 1))
 				{
-					Station futureStation = stations[indices[i + 2]];
+					Station futureStation = stations[indices[i + 1]];
 
-					//MessageBox.Show(stations[indices[i + 2]].GetKey());
+					//MessageBox.Show(stations[indices[i + 1]].GetKey());
 
 					if (station.firstCommonLine(futureStation) != null)
-					{
 						flag = false;
-					}
+					
 				}
 
 				if (flag)
