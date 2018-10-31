@@ -50,7 +50,7 @@ namespace APPD_Assignment_1
             return lines;
         }
 
-        public string firstCommonLine(Station other)
+        public string FirstCommonLine(Station other)
         {
 			IEnumerable<string> search = GetLines().Intersect(other.GetLines()); // error is thrown is .first of empty ienumerable
 
@@ -68,5 +68,6 @@ namespace APPD_Assignment_1
 			}
 			return null;
 		}
+
 	}
 }

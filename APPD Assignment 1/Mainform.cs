@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace APPD_Assignment_1
 {
-	public partial class Mainform : Form
+	public partial class Mainform : Form // There is a problem with the algo transfer limitting. direct line works 1 transfer doesnt
 	{
 
 		public Mainform()
@@ -26,8 +26,8 @@ namespace APPD_Assignment_1
 		{
 			//toolTip.SetToolTip(codeToName, "Converts entered station codes in format \"OOII\" where \nO is the station name and I is the station number\neg. CC2 or DT11");
 
-			List<string[]> records = Util.parseMRTFile();
-			Dictionary<String, List<String>> adj = Util.adjStations(Util.toStationLineAsKey(records));
+			List<string[]> records = Util.ParseMRTFile();
+			Dictionary<String, List<String>> adj = Util.AdjStations(Util.ToStationLineAsKey(records));
 			List<Station> stations = records.ToStations();
 
 			graph = new Graph<Station>(stations);
@@ -57,16 +57,22 @@ namespace APPD_Assignment_1
 			MessageBox.Show("hello");
 		}
 
-		private void calcRoute_Click(object sender, EventArgs e)
+		private void CalcRoute_Click(object sender, EventArgs e)
 		{
 			Station startStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(startStation.Text.ToUpper()));
 			Station endStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(endStation.Text.ToUpper()));
 
 			if (startStationChecked != null)
+			{
 				startStation.Text = startStationChecked.GetName();
+				//startStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(startStation.Text.ToUpper()));
+			}
 
 			if (endStationChecked != null)
+			{
 				endStation.Text = endStationChecked.GetName();
+				//endStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(endStation.Text.ToUpper()));
+			}
 
 			if (!(stationNames.Contains(startStation.Text) && stationNames.Contains(endStation.Text)))
 			{
@@ -74,23 +80,12 @@ namespace APPD_Assignment_1
 				return;
 			}
 
-			// execute the routing function and showing shit here
-
-			//implement
-			GraphSearchStation search = new GraphSearchStation();
-			List<Station> path = search.findPathByKey(graph, startStation.Text, endStation.Text); //best route for all
-
-			//MessageBox.Show(p.Count.ToString());
-			//string t = "";
-			//foreach (Station s in p)
-			//{
-			//	t += s.GetName() + "\n\n";
-			//}
-			MessageBox.Show(Util.pathToString(path));
+			var routeDisplay = new RouteDisplay(graph, startStation.Text, endStation.Text); // make it pass in the station instead of the string
+			routeDisplay.Show();
 
 		}
 
-		private void switchInputs_Click(object sender, EventArgs e)
+		private void SwitchInputs_Click(object sender, EventArgs e)
 		{
 			string tmp = startStation.Text;
 			startStation.Text = endStation.Text;

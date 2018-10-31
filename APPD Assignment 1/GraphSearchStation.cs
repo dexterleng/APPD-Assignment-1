@@ -24,9 +24,9 @@ namespace APPD_Assignment_1
                 if (curr.Equals(dest)) { return true; }
                 foreach (Station neighbour in g.GetNeighbours(curr))
                 {
-                    if (!isVisited(visited, neighbour))
+                    if (!IsVisited(visited, neighbour))
                     {
-                        onLine[neighbour.GetKey()] = curr.firstCommonLine(neighbour);
+                        onLine[neighbour.GetKey()] = curr.FirstCommonLine(neighbour);
                         if (onLine[neighbour.GetKey()].Equals(onLine[curr.GetKey()]) || onLine[curr.GetKey()] == null) {
                             transfers[neighbour.GetKey()] = transfers[curr.GetKey()];
                         } else {
@@ -96,7 +96,7 @@ namespace APPD_Assignment_1
         //    return visited.ContainsKey(curr.GetKey());
         //}
 
-        public List<Station> findPath(Graph<Station> g, Station source, Station dest, int transferLimit = int.MaxValue)
+        public List<Station> FindPath(Graph<Station> g, Station source, Station dest, int transferLimit = int.MaxValue)
         {
             Boolean success = BFS(g, source, dest, transferLimit);
             if (!success) { throw new Exception("Route not found"); }
@@ -117,11 +117,11 @@ namespace APPD_Assignment_1
         //    return findPath(g, source, dest, int.MaxValue);
         //}
 
-        public List<Station> findPathByKey(Graph<Station> g, string sKey, string dKey, int transferLimit = int.MaxValue) // defaults to unlimited transfers
+        public List<Station> FindPathByKey(Graph<Station> g, string sKey, string dKey, int transferLimit = int.MaxValue) // defaults to unlimited transfers
         {
             Station s = g.GetVertex(sKey);
             Station d = g.GetVertex(dKey);
-            return this.findPath(g, s, d, transferLimit);
+            return this.FindPath(g, s, d, transferLimit);
         }
 
         //public List<Station> findPathByKey(Graph<Station> g, string sKey, string dKey)
@@ -129,7 +129,7 @@ namespace APPD_Assignment_1
         //    return this.findPathByKey(g, sKey, dKey, int.MaxValue);
         //}
 
-        private static Boolean isVisited(Dictionary<string, Boolean> visited, Station curr)
+        private static Boolean IsVisited(Dictionary<string, Boolean> visited, Station curr)
         {
             return visited.ContainsKey(curr.GetKey());
         }

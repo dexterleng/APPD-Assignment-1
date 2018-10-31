@@ -11,7 +11,7 @@ namespace APPD_Assignment_1
 	public static class Util //main parsing stuff and other methods in the original program.cs file
 	{
 
-		public static string pathToString(List<Station> stations) // input station path
+		public static string PathToString(List<Station> stations) // input station path
 		{
 
 			if (stations.Count <= 1)
@@ -24,26 +24,15 @@ namespace APPD_Assignment_1
 			indices.Add(index);
 			while (indices[indices.Count - 1] != (stations.Count - 1)) // gets index of station, insert into indices
 			{
-				index = calcNextStationIndex(stations, index);
+				index = CalcNextStationIndex(stations, index);
 				indices.Add(index);
 			}
 
 			Station station = stations[0];
 			Station nextStation = stations[indices[1]];
-			string commonLine = station.firstCommonLine(nextStation);
+			string commonLine = station.FirstCommonLine(nextStation);
 			pathSB.AppendLine(String.Format("Board at {0} ({1}).", station.GetName(), station.GetStationCode(commonLine)));
 
-			//if (2 < indices.Count - 1)
-			//{
-			//	Station futureStation = stations[indices[2]];
-			//	//MessageBox.Show(station.firstCommonLine(futureStation));
-
-			//	if (station.firstCommonLine(futureStation) != null)
-			//	{
-			//		flag = false;
-			//	}
-			//}
-			
 			if (commonLine != null)
 				pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.GetName(), nextStation.GetStationCode(commonLine)));
 
@@ -52,7 +41,7 @@ namespace APPD_Assignment_1
 				int j = indices[i];
 				station = stations[j];
 				nextStation = stations[indices[i + 1]];
-				commonLine = station.firstCommonLine(nextStation);
+				commonLine = station.FirstCommonLine(nextStation);
 
 				bool flag = true;
 
@@ -64,7 +53,7 @@ namespace APPD_Assignment_1
 
 					//MessageBox.Show(stations[indices[i + 1]].GetKey());
 
-					if (station.firstCommonLine(futureStation) != null)
+					if (station.FirstCommonLine(futureStation) != null)
 						flag = false;
 					
 				}
@@ -79,12 +68,25 @@ namespace APPD_Assignment_1
 			return pathSB.ToString();
 		}
 
-		public static int calcNextStationIndex(List<Station> stations, int index)
+		public static string PathToString(List<Station>[] stations)
 		{
-			string currLine = stations[index].firstCommonLine(stations[index + 1]);
+			string res = "";
+			string append = "\n\n OR \n\n";
+
+			foreach (List<Station> listStation in stations)
+			{
+				res += PathToString(listStation) + "\n\n OR \n\n";
+			}
+
+			return res.Substring(0, res.Length-append.Length);
+		}
+
+		public static int CalcNextStationIndex(List<Station> stations, int index)
+		{
+			string currLine = stations[index].FirstCommonLine(stations[index + 1]);
 			for (int i = index + 1; i < stations.Count - 1; i++) // loops from current station
 			{
-				if (!currLine.Equals(stations[i].firstCommonLine(stations[i + 1])))
+				if (!currLine.Equals(stations[i].FirstCommonLine(stations[i + 1])))
 				{
 					return i;
 				}
@@ -94,7 +96,7 @@ namespace APPD_Assignment_1
 			return stations.Count - 1;
 		}
 
-		public static List<string[]> parseMRTFile() // returns the mrt file in format {stationName, stationCode}
+		public static List<string[]> ParseMRTFile() // returns the mrt file in format {stationName, stationCode}
 		{
 			string[] MRTFile = File.ReadAllLines("MRT.txt");
 
@@ -171,7 +173,7 @@ namespace APPD_Assignment_1
 
 		// stationLine is use as key instead
 		// StationLine -> List< [stationName, stationCode] >
-		public static Dictionary<String, List<String[]>> toStationLineAsKey(List<string[]> records)
+		public static Dictionary<String, List<String[]>> ToStationLineAsKey(List<string[]> records)
 		{
 			Dictionary<String, List<String[]>> l = new Dictionary<String, List<String[]>>();
 			string lineCode;
@@ -191,7 +193,7 @@ namespace APPD_Assignment_1
 		}
 
 		// StationName -> List<AdjStationName>
-		public static Dictionary<String, List<String>> adjStations(Dictionary<String, List<String[]>> l)
+		public static Dictionary<String, List<String>> AdjStations(Dictionary<String, List<String[]>> l)
 		{
 			Dictionary<String, List<String>> adj = new Dictionary<String, List<String>>();
 			List<String[]> stations;
@@ -215,6 +217,56 @@ namespace APPD_Assignment_1
 				}
 			}
 			return adj;
+		}
+
+		public static bool SameStation(this Station station, string search)
+		{
+			foreach(string line in station.GetLines())
+			{
+				if (line.Contains(search.Substring(0, 2)))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public static List<Station>[] Find1TransferMax(Graph<Station> graph, Station start, Station dest)
+		{
+			List<Station> stations = graph.GetAllVertices();
+
+			List<Station> intersections = new List<Station>();
+
+
+			for (int i = 0; i < stations.Count; i++)
+			{
+				if (stations[i] != start)
+				{
+					if (stations[i].GetLines().FirstOrDefault(search => start.SameStation(search)) != null && stations[i].GetLines().FirstOrDefault(search => dest.SameStation(search)) != null)
+					{
+						intersections.Add(stations[i]);
+						//MessageBox.Show(stations[i].GetKey());
+					}
+				}
+			}
+
+			if (intersections.Count > 0)
+			{
+				List<Station>[] pathArr = new List<Station>[intersections.Count];
+
+				for (int i = 0; i < intersections.Count; i++)
+				{
+					List<Station> path = new List<Station>();
+					path.Insert(0, start);
+					path.Insert(1, intersections[i]);
+					path.Insert(2, dest);
+
+					pathArr[i] = path;
+				}
+
+				return pathArr;
+			}
+			throw new Exception("Route not found");
 		}
 
 		//public static void printRoute(List<Station> stations)
