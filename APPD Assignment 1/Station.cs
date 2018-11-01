@@ -54,6 +54,37 @@ namespace APPD_Assignment_1
         {
 			IEnumerable<string> search = GetLines().Intersect(other.GetLines()); // error is thrown is .first of empty ienumerable
 
+			if (search.Count() > 1)
+			{
+				Dictionary<string, int> lineToLengthDiff = new Dictionary<string, int>();
+				foreach (string line in search)
+				{
+					int selfCodeNum = -1;
+					foreach (string code in this.GetStationCodes())
+					{
+						if (code.Substring(0, 2).Equals(line))
+						{
+							selfCodeNum = int.Parse(code.Substring(2, code.Length - 2));
+							break;
+						}
+					}
+
+					int otherCodeNum = -1;
+					foreach (string code in other.GetStationCodes())
+					{
+						if (code.Substring(0, 2).Equals(line))
+						{
+							otherCodeNum = int.Parse(code.Substring(2, code.Length - 2));
+							break;
+						}
+					}
+
+					lineToLengthDiff[line] = Math.Abs(selfCodeNum - otherCodeNum);
+				}
+
+				return lineToLengthDiff.Where(e => e.Value == lineToLengthDiff.Min(e2 => e2.Value)).First().Key;
+			}
+
 			return search == null || !search.Any() ? null : search.First(); //if search.any() == true, ienumerable is not empty
         }
 
