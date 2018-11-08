@@ -21,13 +21,15 @@ namespace APPD_Assignment_1
 
 		List<string> stationNames; // just station names
 		Graph<Station> graph;
+		Dictionary<String, List<String[]>> lineStationMap;
 
 		private void Mainform_Load(object sender, EventArgs e)
 		{
 			//toolTip.SetToolTip(codeToName, "Converts entered station codes in format \"OOII\" where \nO is the station name and I is the station number\neg. CC2 or DT11");
 
 			List<string[]> records = Util.ParseMRTFile();
-			Dictionary<String, List<String>> adj = Util.AdjStations(Util.ToStationLineAsKey(records));
+			lineStationMap = Util.ToStationLineAsKey(records);
+			Dictionary<String, List<String>> adj = Util.AdjStations(lineStationMap);
 			List<Station> stations = records.ToStations();
 
 			graph = new Graph<Station>(stations);
@@ -46,50 +48,50 @@ namespace APPD_Assignment_1
 			stationNames.Sort();
 			stationNames = stationNames.Distinct().ToList(); // sorts and removes duplicates from station name list 
 
-			startStation.DataSource = stationNames;
+			StartStation.DataSource = stationNames;
 
-			endStation.BindingContext = new BindingContext();
-			endStation.DataSource = stationNames;
+			EndStation.BindingContext = new BindingContext();
+			EndStation.DataSource = stationNames;
 		}
 
 		private void SearchStations_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("hello");
+			new SearchForm(stationNames, graph, lineStationMap).Show();
 		}
 
 		private void CalcRoute_Click(object sender, EventArgs e)
 		{
-			Station startStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(startStation.Text.ToUpper()));
-			Station endStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(endStation.Text.ToUpper()));
+			Station startStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(StartStation.Text.ToUpper()));
+			Station endStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(EndStation.Text.ToUpper()));
 
 			if (startStationChecked != null)
 			{
-				startStation.Text = startStationChecked.GetName();
+				StartStation.Text = startStationChecked.GetName();
 				//startStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(startStation.Text.ToUpper()));
 			}
 
 			if (endStationChecked != null)
 			{
-				endStation.Text = endStationChecked.GetName();
+				EndStation.Text = endStationChecked.GetName();
 				//endStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(endStation.Text.ToUpper()));
 			}
 
-			if (!(stationNames.Contains(startStation.Text) && stationNames.Contains(endStation.Text)))
+			if (!(stationNames.Contains(StartStation.Text) && stationNames.Contains(EndStation.Text)))
 			{
 				MessageBox.Show("Invalid station entered");
 				return;
 			}
 
-			var routeDisplay = new RouteDisplay(graph, startStation.Text, endStation.Text); // make it pass in the station instead of the string
+			var routeDisplay = new RouteDisplay(graph, StartStation.Text, EndStation.Text); // make it pass in the station instead of the string
 			routeDisplay.Show();
 
 		}
 
 		private void SwitchInputs_Click(object sender, EventArgs e)
 		{
-			string tmp = startStation.Text;
-			startStation.Text = endStation.Text;
-			endStation.Text = tmp;
+			string tmp = StartStation.Text;
+			StartStation.Text = EndStation.Text;
+			EndStation.Text = tmp;
 		}
 
 	}

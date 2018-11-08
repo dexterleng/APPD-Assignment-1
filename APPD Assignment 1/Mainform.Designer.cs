@@ -31,11 +31,11 @@
 			this.components = new System.ComponentModel.Container();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.startStation = new System.Windows.Forms.ComboBox();
-			this.endStation = new System.Windows.Forms.ComboBox();
+			this.StartStation = new System.Windows.Forms.ComboBox();
+			this.EndStation = new System.Windows.Forms.ComboBox();
 			this.SearchStations = new System.Windows.Forms.Button();
-			this.calcRoute = new System.Windows.Forms.Button();
-			this.switchInputs = new System.Windows.Forms.Button();
+			this.CalcRoute = new System.Windows.Forms.Button();
+			this.SwitchInputs = new System.Windows.Forms.Button();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.label3 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
@@ -58,25 +58,25 @@
 			this.label2.TabIndex = 1;
 			this.label2.Text = "End station";
 			// 
-			// startStation
+			// StartStation
 			// 
-			this.startStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-			this.startStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-			this.startStation.FormattingEnabled = true;
-			this.startStation.Location = new System.Drawing.Point(216, 70);
-			this.startStation.Name = "startStation";
-			this.startStation.Size = new System.Drawing.Size(325, 21);
-			this.startStation.TabIndex = 2;
+			this.StartStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+			this.StartStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+			this.StartStation.FormattingEnabled = true;
+			this.StartStation.Location = new System.Drawing.Point(216, 70);
+			this.StartStation.Name = "StartStation";
+			this.StartStation.Size = new System.Drawing.Size(325, 21);
+			this.StartStation.TabIndex = 2;
 			// 
-			// endStation
+			// EndStation
 			// 
-			this.endStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-			this.endStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-			this.endStation.FormattingEnabled = true;
-			this.endStation.Location = new System.Drawing.Point(213, 165);
-			this.endStation.Name = "endStation";
-			this.endStation.Size = new System.Drawing.Size(325, 21);
-			this.endStation.TabIndex = 3;
+			this.EndStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+			this.EndStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+			this.EndStation.FormattingEnabled = true;
+			this.EndStation.Location = new System.Drawing.Point(213, 165);
+			this.EndStation.Name = "EndStation";
+			this.EndStation.Size = new System.Drawing.Size(325, 21);
+			this.EndStation.TabIndex = 3;
 			// 
 			// SearchStations
 			// 
@@ -88,26 +88,26 @@
 			this.SearchStations.UseVisualStyleBackColor = true;
 			this.SearchStations.Click += new System.EventHandler(this.SearchStations_Click);
 			// 
-			// calcRoute
+			// CalcRoute
 			// 
-			this.calcRoute.Location = new System.Drawing.Point(213, 308);
-			this.calcRoute.Name = "calcRoute";
-			this.calcRoute.Size = new System.Drawing.Size(328, 80);
-			this.calcRoute.TabIndex = 5;
-			this.calcRoute.Text = "Calculate Route";
-			this.calcRoute.UseVisualStyleBackColor = true;
-			this.calcRoute.Click += new System.EventHandler(this.CalcRoute_Click);
+			this.CalcRoute.Location = new System.Drawing.Point(213, 308);
+			this.CalcRoute.Name = "CalcRoute";
+			this.CalcRoute.Size = new System.Drawing.Size(328, 80);
+			this.CalcRoute.TabIndex = 5;
+			this.CalcRoute.Text = "Calculate Route";
+			this.CalcRoute.UseVisualStyleBackColor = true;
+			this.CalcRoute.Click += new System.EventHandler(this.CalcRoute_Click);
 			// 
-			// switchInputs
+			// SwitchInputs
 			// 
-			this.switchInputs.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.switchInputs.Location = new System.Drawing.Point(329, 112);
-			this.switchInputs.Name = "switchInputs";
-			this.switchInputs.Size = new System.Drawing.Size(96, 28);
-			this.switchInputs.TabIndex = 6;
-			this.switchInputs.Text = "Swap Stations";
-			this.switchInputs.UseVisualStyleBackColor = true;
-			this.switchInputs.Click += new System.EventHandler(this.SwitchInputs_Click);
+			this.SwitchInputs.Font = new System.Drawing.Font("Lucida Sans Unicode", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.SwitchInputs.Location = new System.Drawing.Point(329, 112);
+			this.SwitchInputs.Name = "SwitchInputs";
+			this.SwitchInputs.Size = new System.Drawing.Size(96, 28);
+			this.SwitchInputs.TabIndex = 6;
+			this.SwitchInputs.Text = "Swap Stations";
+			this.SwitchInputs.UseVisualStyleBackColor = true;
+			this.SwitchInputs.Click += new System.EventHandler(this.SwitchInputs_Click);
 			// 
 			// label3
 			// 
@@ -124,11 +124,11 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.label3);
-			this.Controls.Add(this.switchInputs);
-			this.Controls.Add(this.calcRoute);
+			this.Controls.Add(this.SwitchInputs);
+			this.Controls.Add(this.CalcRoute);
 			this.Controls.Add(this.SearchStations);
-			this.Controls.Add(this.endStation);
-			this.Controls.Add(this.startStation);
+			this.Controls.Add(this.EndStation);
+			this.Controls.Add(this.StartStation);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -146,11 +146,11 @@
 
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.ComboBox startStation;
-		private System.Windows.Forms.ComboBox endStation;
+		private System.Windows.Forms.ComboBox StartStation;
+		private System.Windows.Forms.ComboBox EndStation;
 		private System.Windows.Forms.Button SearchStations;
-		private System.Windows.Forms.Button calcRoute;
-		private System.Windows.Forms.Button switchInputs;
+		private System.Windows.Forms.Button CalcRoute;
+		private System.Windows.Forms.Button SwitchInputs;
 		private System.Windows.Forms.ToolTip toolTip;
 		private System.Windows.Forms.Label label3;
 	}

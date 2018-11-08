@@ -67,6 +67,12 @@
     <Compile Include="RouteDisplay.Designer.cs">
       <DependentUpon>RouteDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Station.cs" />
     <Compile Include="Util.cs" />
     <EmbeddedResource Include="Mainform.resx">
@@ -83,6 +89,9 @@
     </Compile>
     <EmbeddedResource Include="RouteDisplay.resx">
       <DependentUpon>RouteDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
