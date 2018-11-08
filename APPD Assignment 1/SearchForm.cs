@@ -73,7 +73,7 @@ namespace APPD_Assignment_1
 				string formattedStr = "";
 
 				foreach (string[] info in currentLine)
-					formattedStr += string.Format("{0} ({1})\n", info[0], info[1]);
+					formattedStr += string.Format("{2}{0} ({1}){2}\n", info[0], info[1], info[0] == SearchStation.Text ? "\n" + new string('-', 50) + "\n" : "");
 
 				//MessageBox.Show(formattedStr);
 
