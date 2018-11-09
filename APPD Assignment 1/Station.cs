@@ -10,40 +10,28 @@ namespace APPD_Assignment_1
         private List<string> stationCodes = new List<string>();
         private string stationName;
 
-        public Station(string stationName)
+		public List<string> StationCodes { get => stationCodes; }
+		public string Name { get => stationName; }
+
+		public Station(string stationName)
         {
             this.stationName = stationName;
         }
 
         public void AddStationCode(string stationCode)
         {
-            this.stationCodes.Add(stationCode);
-        }
-
-        public List<string> GetStationCodes()
-        {
-            return this.stationCodes;
-        }
-
-        public string GetName()
-        {
-            return this.stationName;
-        }
-
-        public string GetKey()
-        {
-            return this.GetName();
+            stationCodes.Add(stationCode);
         }
 
         public Boolean Equals(IVertex o)
         {
-            return this.GetKey().Equals(o.GetKey());
+            return Name.Equals(o.Name);
         }
 
         public List<string> GetLines()
         {
             List<string> lines = new List<string>();
-            foreach (string code in this.GetStationCodes())
+            foreach (string code in StationCodes)
             {
                 lines.Add(code.Substring(0, 2));
             }
@@ -60,7 +48,7 @@ namespace APPD_Assignment_1
 				foreach (string line in search)
 				{
 					int selfCodeNum = -1;
-					foreach (string code in this.GetStationCodes())
+					foreach (string code in StationCodes)
 					{
 						if (code.Substring(0, 2).Equals(line))
 						{
@@ -70,7 +58,7 @@ namespace APPD_Assignment_1
 					}
 
 					int otherCodeNum = -1;
-					foreach (string code in other.GetStationCodes())
+					foreach (string code in other.StationCodes)
 					{
 						if (code.Substring(0, 2).Equals(line))
 						{
@@ -90,7 +78,7 @@ namespace APPD_Assignment_1
 
 		public string GetStationCode(string line)
 		{
-			foreach (string stationCode in this.stationCodes)
+			foreach (string stationCode in stationCodes)
 			{
 				if (stationCode.Substring(0, 2).Equals(line))
 				{

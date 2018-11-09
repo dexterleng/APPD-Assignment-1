@@ -31,8 +31,8 @@ namespace APPD_Assignment_1
 			Station station = stations[0];
 			Station nextStation = stations[indices[1]];
 			string commonLine = station.FirstCommonLine(nextStation);
-			pathSB.AppendLine(String.Format("Aboard at {0} ({1}).", station.GetName(), station.GetStationCode(commonLine)));
-			pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.GetName(), nextStation.GetStationCode(commonLine)));
+			pathSB.AppendLine(String.Format("Aboard at {0} ({1}).", station.Name, station.GetStationCode(commonLine)));
+			pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.Name, nextStation.GetStationCode(commonLine)));
 			for (int i = 1; i < indices.Count - 1; i++)
 			{
 				int j = indices[i];
@@ -41,9 +41,9 @@ namespace APPD_Assignment_1
 				commonLine = station.FirstCommonLine(nextStation);
 
 				pathSB.AppendLine(String.Format("Change to {0} line", commonLine));
-				pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.GetName(), nextStation.GetStationCode(commonLine)));
+				pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.Name, nextStation.GetStationCode(commonLine)));
 			}
-			pathSB.AppendLine(String.Format("Alight at destination {0}.", nextStation.GetName()));
+			pathSB.AppendLine(String.Format("Alight at destination {0}.", nextStation.Name));
 			return pathSB.ToString();
 		}
 
@@ -224,7 +224,7 @@ namespace APPD_Assignment_1
 					if (stations[i].GetLines().FirstOrDefault(search => start.SameStation(search)) != null && stations[i].GetLines().FirstOrDefault(search => dest.SameStation(search)) != null)
 					{
 						intersections.Add(stations[i]);
-						//MessageBox.Show(stations[i].GetKey());
+						//MessageBox.Show(stations[i].Name);
 					}
 				}
 			}
@@ -252,9 +252,9 @@ namespace APPD_Assignment_1
 		//{
 		//	foreach (Station station in stations)
 		//	{
-		//		Console.Write(station.GetName());
+		//		Console.Write(station.Name);
 		//		Console.Write(": ");
-		//		Console.WriteLine(station.GetStationCodes());
+		//		Console.WriteLine(station.StationCodes);
 		//	}
 		//}
 	}

@@ -13,13 +13,13 @@ namespace APPD_Assignment_1
         {
             foreach(T vertex in vertices)
             {
-                vertexMap[vertex.GetKey()] = vertex;
+                vertexMap[vertex.Name] = vertex;
             }
         }
 
         public void AddVertex(T v)
         {
-            this.vertexMap[v.GetKey()] = v;
+            this.vertexMap[v.Name] = v;
         }
 
         public T GetVertex(string key)
@@ -48,17 +48,17 @@ namespace APPD_Assignment_1
 		// use AddEdgeByKey instead.
 		private void AddEdge(T v, T w)
         {
-            if (!this.adj.ContainsKey(v.GetKey()))
+            if (!this.adj.ContainsKey(v.Name))
             {
-                this.adj[v.GetKey()] = new HashSet<string>();
+                this.adj[v.Name] = new HashSet<string>();
             }
-            if (!this.adj.ContainsKey(w.GetKey()))
+            if (!this.adj.ContainsKey(w.Name))
             {
-                this.adj[w.GetKey()] = new HashSet<string>();
+                this.adj[w.Name] = new HashSet<string>();
             }
 
-            this.adj[v.GetKey()].Add(w.GetKey());
-            this.adj[w.GetKey()].Add(v.GetKey());
+            this.adj[v.Name].Add(w.Name);
+            this.adj[w.Name].Add(v.Name);
         }
 
         public void AddEdgeByKey(string vKey, string wKey)
@@ -71,7 +71,7 @@ namespace APPD_Assignment_1
         public List<T> GetNeighbours(T v)
         {
             List<T> neighbours = new List<T>();
-            HashSet<string> nKeys = this.adj[v.GetKey()];
+            HashSet<string> nKeys = this.adj[v.Name];
             foreach (string key in nKeys)
             {
                 neighbours.Add(this.vertexMap[key]);

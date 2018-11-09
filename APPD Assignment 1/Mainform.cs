@@ -61,19 +61,19 @@ namespace APPD_Assignment_1
 
 		private void CalcRoute_Click(object sender, EventArgs e)
 		{
-			Station startStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(StartStation.Text.ToUpper()));
-			Station endStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(EndStation.Text.ToUpper()));
+			Station startStationChecked = graph.GetAllVertices().Find(station => station.StationCodes.Contains(StartStation.Text.ToUpper()));
+			Station endStationChecked = graph.GetAllVertices().Find(station => station.StationCodes.Contains(EndStation.Text.ToUpper()));
 
 			if (startStationChecked != null)
 			{
-				StartStation.Text = startStationChecked.GetName();
-				//startStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(startStation.Text.ToUpper()));
+				StartStation.Text = startStationChecked.Name;
+				//startStationChecked = graph.GetAllVertices().Find(station => station.StationCodes.Contains(startStation.Text.ToUpper()));
 			}
 
 			if (endStationChecked != null)
 			{
-				EndStation.Text = endStationChecked.GetName();
-				//endStationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(endStation.Text.ToUpper()));
+				EndStation.Text = endStationChecked.Name;
+				//endStationChecked = graph.GetAllVertices().Find(station => station.StationCodes.Contains(endStation.Text.ToUpper()));
 			}
 
 			if (!(stationNames.Contains(StartStation.Text) && stationNames.Contains(EndStation.Text)))

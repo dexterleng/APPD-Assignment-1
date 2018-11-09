@@ -33,10 +33,10 @@ namespace APPD_Assignment_1
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
 			// copy of the one in the main form calculate route button
-			Station stationChecked = graph.GetAllVertices().Find(station => station.GetStationCodes().Contains(SearchStation.Text.ToUpper()));
+			Station stationChecked = graph.GetAllVertices().Find(station => station.StationCodes.Contains(SearchStation.Text.ToUpper()));
 
 			if (stationChecked != null)
-				SearchStation.Text = stationChecked.GetName();
+				SearchStation.Text = stationChecked.Name;
 
 			if (!(stationNames.Contains(SearchStation.Text)))
 			{
@@ -54,7 +54,7 @@ namespace APPD_Assignment_1
 			if (stationChecked == null)
 				stationChecked = graph.GetVertex(SearchStation.Text);
 
-			List<string> sameLines = stationChecked.GetStationCodes();
+			List<string> sameLines = stationChecked.StationCodes;
 
 			foreach (string line in sameLines)
 			{
