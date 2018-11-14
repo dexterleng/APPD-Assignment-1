@@ -66,13 +66,13 @@ namespace APPD_Assignment_1
 
 			if (startStationChecked != null)
 			{
-				StartStation.Text = startStationChecked.Name;
+				StartStation.Text = startStationChecked.Key;
 				//startStationChecked = graph.GetAllVertices().Find(station => station.StationCodes.Contains(startStation.Text.ToUpper()));
 			}
 
 			if (endStationChecked != null)
 			{
-				EndStation.Text = endStationChecked.Name;
+				EndStation.Text = endStationChecked.Key;
 				//endStationChecked = graph.GetAllVertices().Find(station => station.StationCodes.Contains(endStation.Text.ToUpper()));
 			}
 

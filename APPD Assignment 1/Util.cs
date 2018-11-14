@@ -31,8 +31,8 @@ namespace APPD_Assignment_1
 			Station station = stations[0];
 			Station nextStation = stations[indices[1]];
 			string commonLine = station.FirstCommonLine(nextStation);
-			pathSB.AppendLine(String.Format("Aboard at {0} ({1}).", station.Name, station.GetStationCode(commonLine)));
-			pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.Name, nextStation.GetStationCode(commonLine)));
+			pathSB.AppendLine(String.Format("Aboard at {0} ({1}).", station.Key, station.GetStationCode(commonLine)));
+			pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.Key, nextStation.GetStationCode(commonLine)));
 			for (int i = 1; i < indices.Count - 1; i++)
 			{
 				int j = indices[i];
@@ -41,9 +41,9 @@ namespace APPD_Assignment_1
 				commonLine = station.FirstCommonLine(nextStation);
 
 				pathSB.AppendLine(String.Format("Change to {0} line", commonLine));
-				pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.Name, nextStation.GetStationCode(commonLine)));
+				pathSB.AppendLine(String.Format("Take to {0} ({1}).", nextStation.Key, nextStation.GetStationCode(commonLine)));
 			}
-			pathSB.AppendLine(String.Format("Alight at destination {0}.", nextStation.Name));
+			pathSB.AppendLine(String.Format("Alight at destination {0}.", nextStation.Key));
 			return pathSB.ToString();
 		}
 
