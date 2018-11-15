@@ -12,10 +12,10 @@ namespace APPD_Assignment_1
 {
 	public partial class RouteDisplay : Form
 	{
-		private Graph<Station> graph;
+		private GraphSearchStation graph;
 		private string startStation, endStation;
 
-		public RouteDisplay(Graph<Station> graph, string startStation, string endStation)
+		public RouteDisplay(GraphSearchStation graph, string startStation, string endStation)
 		{
 
 			InitializeComponent();
@@ -38,15 +38,13 @@ namespace APPD_Assignment_1
 			//implement
 			try
 			{
-				GraphSearchStation search = new GraphSearchStation();
 
-
-				if (graph.GetVertex(startStation).FirstCommonLine(graph.GetVertex(endStation)) != null)
+				if (this.graph.GetVertex(startStation).FirstCommonLine(this.graph.GetVertex(endStation)) != null)
 				{
 					List<Station> path = new List<Station>();
 
-					path.Insert(0, graph.GetVertex(startStation));
-					path.Insert(1, graph.GetVertex(endStation));
+					path.Insert(0, this.graph.GetVertex(startStation));
+					path.Insert(1, this.graph.GetVertex(endStation));
 
 					RouteBox.Text = Util.PathToString(path);
 					return;
@@ -54,11 +52,11 @@ namespace APPD_Assignment_1
 
 				if (BestRoute.Checked)
 				{
-					RouteBox.Text = Util.PathToString(search.FindPathByKey(graph, startStation, endStation));
+					RouteBox.Text = Util.PathToString(graph.FindPathByKey(this.graph, startStation, endStation));
 				}
 				else if (Max1.Checked)
 				{
-					RouteBox.Text = Util.PathToString(Util.Find1TransferMax(graph, graph.GetVertex(startStation), graph.GetVertex(endStation)));
+					RouteBox.Text = Util.PathToString(Util.Find1TransferMax(this.graph, this.graph.GetVertex(startStation), this.graph.GetVertex(endStation)));
 				}
 				else
 				{

@@ -20,7 +20,7 @@ namespace APPD_Assignment_1
 		}
 
 		List<string> stationNames; // just station names
-		Graph<Station> graph;
+		GraphSearchStation graph;
 		Dictionary<String, List<String[]>> lineStationMap;
 
 		private void Mainform_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace APPD_Assignment_1
 			Dictionary<String, List<String>> adj = Util.AdjStations(lineStationMap);
 			List<Station> stations = records.ToStations();
 
-			graph = new Graph<Station>(stations);
+			graph = new GraphSearchStation(stations);
 
 
 			foreach (string station in adj.Keys)

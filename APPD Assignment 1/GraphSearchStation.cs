@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace APPD_Assignment_1
 {
-    public class GraphSearchStation
+    public class GraphSearchStation : Graph<Station>
     {
         private Dictionary<string, string> edgeTo = new Dictionary<string, string>();
 
@@ -58,5 +58,7 @@ namespace APPD_Assignment_1
         {
             return visited.ContainsKey(curr.Key);
         }
+
+		public GraphSearchStation(List<Station> vertices) : base(vertices){}
     }
 }

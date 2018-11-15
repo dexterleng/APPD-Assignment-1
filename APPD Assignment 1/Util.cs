@@ -152,7 +152,7 @@ namespace APPD_Assignment_1
 
 		// stationLine is use as key instead
 		// StationLine -> List< [stationName, stationCode] >
-		public static Dictionary<String, List<String[]>> ToStationLineAsKey(List<string[]> records)
+		public static Dictionary<String, List<String[]>> ToStationLineAsKey(List<string[]> records) // maps linecode to list of {stationName, stationCode} in the line
 		{
 			Dictionary<String, List<String[]>> l = new Dictionary<String, List<String[]>>();
 			string lineCode;

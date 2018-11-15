@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.StartStation = new System.Windows.Forms.ComboBox();
@@ -36,7 +35,6 @@
 			this.SearchStations = new System.Windows.Forms.Button();
 			this.CalcRoute = new System.Windows.Forms.Button();
 			this.SwitchInputs = new System.Windows.Forms.Button();
-			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.label3 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
@@ -151,7 +149,6 @@
 		private System.Windows.Forms.Button SearchStations;
 		private System.Windows.Forms.Button CalcRoute;
 		private System.Windows.Forms.Button SwitchInputs;
-		private System.Windows.Forms.ToolTip toolTip;
 		private System.Windows.Forms.Label label3;
 	}
 }
