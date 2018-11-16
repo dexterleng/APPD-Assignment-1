@@ -10,7 +10,7 @@ namespace APPD_Assignment_1
         private Boolean BFS(Graph<Station> g, Station source, Station dest)
         {
             Dictionary<string, Boolean> visited = new Dictionary<string, Boolean>();
-            visited[source.Key] = true;
+            visited[source.Name] = true;
             Queue<Station> q = new Queue<Station>();
             Station curr;
             q.Enqueue(source);
@@ -22,8 +22,8 @@ namespace APPD_Assignment_1
                 {
                     if (!IsVisited(visited, neighbour))
                     {
-                        this.edgeTo[neighbour.Key] = curr.Key;
-                        visited[neighbour.Key] = true;
+                        this.edgeTo[neighbour.Name] = curr.Name;
+                        visited[neighbour.Name] = true;
                         q.Enqueue(neighbour);
                     }
                 }
@@ -41,7 +41,7 @@ namespace APPD_Assignment_1
             {
                 // inefficient, maybe change to LinkedList or Stack
                 path.Insert(0, curr);
-                curr = g.GetVertex(this.edgeTo[curr.Key]);
+                curr = g.GetVertex(this.edgeTo[curr.Name]);
             }
             path.Insert(0, curr);
             return path;
@@ -56,7 +56,7 @@ namespace APPD_Assignment_1
 
         private static Boolean IsVisited(Dictionary<string, Boolean> visited, Station curr)
         {
-            return visited.ContainsKey(curr.Key);
+            return visited.ContainsKey(curr.Name);
         }
 
 		public GraphSearchStation(List<Station> vertices) : base(vertices){}

@@ -36,7 +36,7 @@ namespace APPD_Assignment_1
 			Station stationChecked = graph.GetAllVertices().Find(station => station.StationCodes.Contains(SearchStation.Text.ToUpper()));
 
 			if (stationChecked != null)
-				SearchStation.Text = stationChecked.Key;
+				SearchStation.Text = stationChecked.Name;
 
 			if (!(stationNames.Contains(SearchStation.Text)))
 			{

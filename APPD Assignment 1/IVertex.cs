@@ -4,7 +4,7 @@ namespace APPD_Assignment_1
 {
     public interface IVertex
     {
-		string Key { get; } // returns station name
+		string Name { get; }
 		Boolean Equals(IVertex o);
     }
 }

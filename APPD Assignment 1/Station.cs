@@ -11,7 +11,7 @@ namespace APPD_Assignment_1
         private string stationName;
 
 		public List<string> StationCodes { get => stationCodes; }
-		public string Key { get => stationName; }
+		public string Name { get => stationName; }
 
 		public Station(string stationName)
         {
@@ -25,7 +25,7 @@ namespace APPD_Assignment_1
 
         public Boolean Equals(IVertex o)
         {
-            return Key.Equals(o.Key);
+            return Name.Equals(o.Name);
         }
 
         public List<string> GetLines()
