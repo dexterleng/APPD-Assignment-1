@@ -31,11 +31,12 @@ namespace APPD_Assignment_1
             return false;
         }
 
-        public List<Station> FindPath(Graph<Station> g, Station source, Station dest)
+        public Path FindPath(Graph<Station> g, Station source, Station dest)
         {
             Boolean success = BFS(g, source, dest);
             if (!success) { throw new Exception("Route not found"); }
-            List<Station> path = new List<Station>();
+			//List<Station> path = new List<Station>();
+			Path path = new Path();
             Station curr = dest;
             while (!curr.Equals(source))
             {
@@ -47,7 +48,7 @@ namespace APPD_Assignment_1
             return path;
         }
 
-        public List<Station> FindPathByKey(Graph<Station> g, string sKey, string dKey)
+        public Path FindPathByKey(Graph<Station> g, string sKey, string dKey)
         {
             Station s = g.GetVertex(sKey);
             Station d = g.GetVertex(dKey);

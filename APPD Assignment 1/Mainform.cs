@@ -82,6 +82,11 @@ namespace APPD_Assignment_1
 				return;
 			}
 
+			if (StartStation.Text == EndStation.Text)
+			{
+				MessageBox.Show("Already at destination station");
+			}
+
 			var routeDisplay = new RouteDisplay(graph, StartStation.Text, EndStation.Text); // make it pass in the station instead of the string
 			routeDisplay.Show();
 

@@ -41,22 +41,30 @@ namespace APPD_Assignment_1
 
 				if (this.graph.GetVertex(startStation).FirstCommonLine(this.graph.GetVertex(endStation)) != null)
 				{
-					List<Station> path = new List<Station>();
+					Path path = new Path();
 
 					path.Insert(0, this.graph.GetVertex(startStation));
 					path.Insert(1, this.graph.GetVertex(endStation));
 
-					RouteBox.Text = Util.PathToString(path);
+					RouteBox.Text = path.ToString();
 					return;
 				}
 
 				if (BestRoute.Checked)
 				{
-					RouteBox.Text = Util.PathToString(graph.FindPathByKey(this.graph, startStation, endStation));
+					RouteBox.Text = graph.FindPathByKey(this.graph, startStation, endStation).ToString();
 				}
 				else if (Max1.Checked)
 				{
-					RouteBox.Text = Util.PathToString(Util.Find1TransferMax(this.graph, this.graph.GetVertex(startStation), this.graph.GetVertex(endStation)));
+					string res = "";
+					string append = "\n\n OR \n\n";
+
+					foreach (Path listStation in Util.Find1TransferMax(this.graph, this.graph.GetVertex(startStation), this.graph.GetVertex(endStation)))
+					{
+						res += listStation.ToString() + "\n\n OR \n\n";
+					}
+
+					RouteBox.Text = res.Substring(0, res.Length - append.Length);
 				}
 				else
 				{
