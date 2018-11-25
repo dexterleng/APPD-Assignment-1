@@ -12,10 +12,11 @@ namespace APPD_Assignment_1
 {
 	public partial class RouteDisplay : Form
 	{
-		private GraphSearchStation graph;
+		private Graph<Station> graph;
 		private string startStation, endStation;
+        private GraphSearchStation pathFinder = new GraphSearchStation();
 
-		public RouteDisplay(GraphSearchStation graph, string startStation, string endStation)
+		public RouteDisplay(Graph<Station> graph, string startStation, string endStation)
 		{
 
 			InitializeComponent();
@@ -52,7 +53,7 @@ namespace APPD_Assignment_1
 
 				if (BestRoute.Checked)
 				{
-					RouteBox.Text = graph.FindPathByKey(this.graph, startStation, endStation).ToString();
+					RouteBox.Text = pathFinder.FindPathByKey(this.graph, startStation, endStation).ToString();
 				}
 				else if (Max1.Checked)
 				{
